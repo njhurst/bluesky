@@ -140,21 +140,21 @@ void serialEvent() {
   }
 }
 
+int t = 0;
+
 void loop() {
   // put your main code here, to run repeatedly:
   serialEvent();
-  for (i = high; i < low; i++)
-  {
-    set_lux(i);
-    serialEvent();
-    delay(delay_time);
+  float pit = 2*3.1415926535897932384626433832795*t/1024.0;
+  t++;
+  if(t >= 1024) {
+    t = 0;
   }
-
-  for (i = low; i > high; i--)
-  {
-    set_lux(i);
-    serialEvent();
-    delay(delay_time);
+  for(int i = 0; i < 8; i++ ) {
+    float x = (1+sin(pit+i))*0.5*(1+sin(pit+i*1.61))*0.5;
+    lux[i] = high + (low - high)*(1-x);
   }
+  serialEvent();
+  delay(delay_time);
 
 }
