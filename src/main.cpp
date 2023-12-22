@@ -151,7 +151,7 @@ void loop() {
     t = 0;
   }
   for(int i = 0; i < 8; i++ ) {
-    float x = (1+sin(pit+i))*0.5*(1+sin(pit+i*1.61))*0.5;
+    float x = (1+sin(pit+i))*0.5*(1+sin(pit+i*1.61))*0.5; // make it more 0 than 1
     lux[i] = high + (low - high)*(1-x);
   }
   serialEvent();
